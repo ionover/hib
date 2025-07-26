@@ -27,11 +27,11 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = false3)
+    @Column(nullable = false)
     private String surname;
 
     @Embedded
-    private Contract contract;
+    private Contact contact;
 
     @ManyToOne(optional = false)
     private City city;
