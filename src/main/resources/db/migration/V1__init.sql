@@ -1,58 +1,34 @@
--- CREATE TABLE IF NOT EXISTS CUSTOMERS (
---     id SERIAL PRIMARY KEY,
---     name VARCHAR (100) NOT NULL,
---     surname VARCHAR (100) NOT NULL,
---     age INT,
---     phone_number VARCHAR (20)
---     );
---
--- CREATE TABLE IF NOT EXISTS ORDERS (
---     id SERIAL PRIMARY KEY,
---     date DATE NOT NULL,
---     customer_id INT NOT NULL,
---     product_name VARCHAR (255) NOT NULL,
---     amount NUMERIC (10, 2) NOT NULL,
---     CONSTRAINT fk_orders_customers FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (id) ON DELETE CASCADE
---     );
---
---
---
---
--- -- Пример вставки 5 записей в таблицу CUSTOMERS
--- INSERT INTO CUSTOMERS (name, surname, age, phone_number)
--- VALUES
---     (
---         'Alexey', 'Smirnov', 28, '555-0101'
---     ),
---     (
---         'Maria', 'Ivanova', 34, '555-0202'
---     ),
---     (
---         'Dmitry', 'Petrov', 45, '555-0303'
---     ),
---     (
---         'Elena', 'Sokolova', 22, '555-0404'
---     ),
---     (
---         'Sergey', 'Kuznetsov', 39, '555-0505'
---     );
--- -- Пример вставки 5 записей в таблицу ORDERS
--- INSERT INTO ORDERS (
---     date, customer_id, product_name, amount
--- )
--- VALUES
---     (
---         '2025-07-10', 1, 'Smartphone', 699.99
---     ),
---     (
---         '2025-07-11', 2, 'Headphones', 149.50
---     ),
---     (
---         '2025-07-12', 1, 'USB-C Cable', 19.99
---     ),
---     (
---         '2025-07-13', 3, 'Monitor', 249.00
---     ),
---     (
---         '2025-07-14', 4, 'Keyboard', 89.95
---     );
+-- Создание таблицы City
+CREATE TABLE city (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+-- Создание таблицы Person
+CREATE TABLE person (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(1023) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
+    age INTEGER NOT NULL,
+    gender VARCHAR(10),
+    email VARCHAR(255),
+    phone VARCHAR(255),
+    city_id BIGINT NOT NULL,
+    CONSTRAINT fk_person_city FOREIGN KEY (city_id) REFERENCES city(id)
+);
+
+-- Вставка тестовых данных в таблицу City
+INSERT INTO city (name) VALUES 
+    ('Moscow'),
+    ('Saint Petersburg'),
+    ('Novosibirsk'),
+    ('Yekaterinburg'),
+    ('Kazan');
+
+-- Вставка тестовых данных в таблицу Person
+INSERT INTO person (name, surname, age, gender, email, phone, city_id) VALUES 
+    ('Alexey', 'Smirnov', 28, 'MALE', 'alexey.smirnov@example.com', '555-0101', 1),
+    ('Maria', 'Ivanova', 34, 'FEMALE', 'maria.ivanova@example.com', '555-0202', 1),
+    ('Dmitry', 'Petrov', 45, 'MALE', 'dmitry.petrov@example.com', '555-0303', 2),
+    ('Elena', 'Sokolova', 22, 'FEMALE', 'elena.sokolova@example.com', '555-0404', 2),
+    ('Sergey', 'Kuznetsov', 39, 'MALE', 'sergey.kuznetsov@example.com', '555-0505', 3);

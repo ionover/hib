@@ -17,8 +17,8 @@ public class hibRepo {
 
     public List<Person> getPersonsByCity(String city) {
         return entityManager.createQuery(
-                "SELECT p FROM Person p WHERE p.city.name = :city", Person.class)
-                .setParameter("city", city)
-                .getResultList();
+                                    "SELECT p FROM Person p WHERE p.city.name = :city", Person.class)
+                            .setParameter("city", city)
+                            .getResultList();
     }
 }
